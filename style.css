@@ -1,3 +1,4 @@
+/* 기본 라이트 모드 변수 */
 :root {
     --bg-color: #f0f2f5;
     --container-bg: #ffffff;
@@ -10,7 +11,8 @@
     --transition-speed: 0.3s;
 }
 
-[data-theme="dark"] {
+/* 다크 모드 변수 - html[data-theme='dark'] 에 적용 */
+html[data-theme="dark"] {
     --bg-color: #1a1a1a;
     --container-bg: #2d2d2d;
     --text-primary: #ffffff;
@@ -30,11 +32,11 @@
 body {
     font-family: 'Noto Sans KR', sans-serif;
     background-color: var(--bg-color);
+    color: var(--text-primary);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: var(--text-primary);
     transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
@@ -54,7 +56,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.2s, background-color var(--transition-speed);
+    transition: all var(--transition-speed);
     z-index: 1000;
 }
 
@@ -102,7 +104,6 @@ h1 {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* 로또 번호별 색상은 다크 모드에서도 유지됨 (가독성을 위해) */
 .ball-1 { background-color: #fbc400; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 .ball-11 { background-color: #69c8f2; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 .ball-21 { background-color: #ff7272; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }

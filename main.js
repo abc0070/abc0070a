@@ -1,29 +1,34 @@
 const generateBtn = document.getElementById('generate-btn');
 const numberCircles = document.querySelectorAll('.number-circle');
 const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
+const htmlTag = document.documentElement;
 
-// 테마 초기 설정 (localStorage 확인)
+// 테마 초기 설정
 const savedTheme = localStorage.getItem('theme') || 'light';
-body.setAttribute('data-theme', savedTheme);
+htmlTag.setAttribute('data-theme', savedTheme);
 updateThemeIcon(savedTheme);
 
 // 테마 토글 이벤트
 themeToggle.addEventListener('click', () => {
-    const currentTheme = body.getAttribute('data-theme');
+    const currentTheme = htmlTag.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     
-    body.setAttribute('data-theme', newTheme);
+    htmlTag.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon(newTheme);
+    console.log(`Theme changed to: ${newTheme}`);
 });
 
 function updateThemeIcon(theme) {
     const icon = themeToggle.querySelector('i');
     if (theme === 'dark') {
         icon.className = 'fas fa-sun';
+        themeToggle.style.backgroundColor = '#2d2d2d';
+        themeToggle.style.color = '#ffffff';
     } else {
         icon.className = 'fas fa-moon';
+        themeToggle.style.backgroundColor = '#ffffff';
+        themeToggle.style.color = '#2c3e50';
     }
 }
 
