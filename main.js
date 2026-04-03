@@ -80,17 +80,21 @@ function getBallColorClass(number) {
     return 'ball-41';
 }
 
-// --- 동물상 테스트 (이미지 업로드 버전) ---
+// --- 동물상 테스트 (이미지 파일 업로드 버전) ---
 const MODEL_URL = "https://teachablemachine.withgoogle.com/models/Hscx2n06o/";
 let model, labelContainer, maxPredictions;
 
-// 페이지 로드 시 모델 미리 불러오기
+// 모델 미리 로드
 async function loadModel() {
-    const modelURL = MODEL_URL + "model.json";
-    const metadataURL = MODEL_URL + "metadata.json";
-    model = await tmImage.load(modelURL, metadataURL);
-    maxPredictions = model.getTotalClasses();
-    console.log("Model loaded");
+    try {
+        const modelURL = MODEL_URL + "model.json";
+        const metadataURL = MODEL_URL + "metadata.json";
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+        console.log("AI Model loaded successfully");
+    } catch (e) {
+        console.error("Failed to load AI Model", e);
+    }
 }
 loadModel();
 
@@ -99,40 +103,50 @@ const imagePreview = document.getElementById('image-preview');
 const loadingMsg = document.getElementById('loading-message');
 labelContainer = document.getElementById('label-container');
 
+// 파일이 선택되었을 때의 이벤트
 imageUpload.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // 이미지 미리보기 표시
     const reader = new FileReader();
-    reader.onload = async (event) => {
+    
+    // 파일 읽기가 완료되면
+    reader.onload = (event) => {
+        // 이미지 미리보기 소스 설정
         imagePreview.src = event.target.result;
         imagePreview.style.display = 'block';
         
-        // AI 분석 시작
-        loadingMsg.style.display = 'block';
-        labelContainer.innerHTML = ''; // 기존 결과 제거
-        
-        // 모델 로딩 대기 (이미 로드되었겠지만 안전하게)
-        if (!model) await loadModel();
-        
-        await predict(imagePreview);
-        loadingMsg.style.display = 'none';
+        // 이미지 태그에 로드가 완료된 시점에 분석 실행
+        imagePreview.onload = async () => {
+            loadingMsg.style.display = 'block';
+            labelContainer.innerHTML = ''; 
+            
+            if (!model) await loadModel();
+            
+            // AI 판단 실행
+            await predict(imagePreview);
+            loadingMsg.style.display = 'none';
+        };
     };
+    
     reader.readAsDataURL(file);
 });
 
 async function predict(imgElement) {
+    if (!model) return;
+    
+    // 모델 예측 수행
     const prediction = await model.predict(imgElement);
     
-    // 확률이 높은 순으로 정렬
+    // 확률 순으로 정렬
     prediction.sort((a, b) => b.probability - a.probability);
 
+    // 결과 레이아웃 생성
+    labelContainer.innerHTML = ''; // 초기화
     for (let i = 0; i < maxPredictions; i++) {
         const className = prediction[i].className;
         const probability = (prediction[i].probability * 100).toFixed(0);
         
-        // 결과 바 HTML 생성
         const resultItem = document.createElement('div');
         resultItem.className = 'result-bar-wrapper';
         resultItem.innerHTML = `
