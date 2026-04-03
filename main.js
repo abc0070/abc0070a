@@ -80,61 +80,70 @@ function getBallColorClass(number) {
     return 'ball-41';
 }
 
-// --- 동물상 테스트 (Teachable Machine) ---
-// Teachable Machine 모델 주소 (온라인 주소로 변경 가능)
-const MODEL_URL = "https://teachablemachine.withgoogle.com/models/Hscx2n06o/"; 
-// 위 주소는 예시입니다. 본인의 모델 주소를 사용하려면 수정하세요.
+// --- 동물상 테스트 (이미지 업로드 버전) ---
+const MODEL_URL = "https://teachablemachine.withgoogle.com/models/Hscx2n06o/";
+let model, labelContainer, maxPredictions;
 
-let model, webcam, labelContainer, maxPredictions;
+// 페이지 로드 시 모델 미리 불러오기
+async function loadModel() {
+    const modelURL = MODEL_URL + "model.json";
+    const metadataURL = MODEL_URL + "metadata.json";
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
+    console.log("Model loaded");
+}
+loadModel();
 
-async function initAnimalTest() {
-    const startBtn = document.getElementById("start-btn");
-    const loadingMsg = document.getElementById("loading-message");
+const imageUpload = document.getElementById('image-upload');
+const imagePreview = document.getElementById('image-preview');
+const loadingMsg = document.getElementById('loading-message');
+labelContainer = document.getElementById('label-container');
+
+imageUpload.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // 이미지 미리보기 표시
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+        imagePreview.src = event.target.result;
+        imagePreview.style.display = 'block';
+        
+        // AI 분석 시작
+        loadingMsg.style.display = 'block';
+        labelContainer.innerHTML = ''; // 기존 결과 제거
+        
+        // 모델 로딩 대기 (이미 로드되었겠지만 안전하게)
+        if (!model) await loadModel();
+        
+        await predict(imagePreview);
+        loadingMsg.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+});
+
+async function predict(imgElement) {
+    const prediction = await model.predict(imgElement);
     
-    startBtn.style.display = "none";
-    loadingMsg.style.display = "block";
+    // 확률이 높은 순으로 정렬
+    prediction.sort((a, b) => b.probability - a.probability);
 
-    try {
-        const modelURL = MODEL_URL + "model.json";
-        const metadataURL = MODEL_URL + "metadata.json";
-
-        model = await tmImage.load(modelURL, metadataURL);
-        maxPredictions = model.getTotalClasses();
-
-        const flip = true; 
-        webcam = new tmImage.Webcam(200, 200, flip); 
-        await webcam.setup(); 
-        await webcam.play();
-        window.requestAnimationFrame(loopAnimalTest);
-
-        loadingMsg.style.display = "none";
-        document.getElementById("webcam-container").appendChild(webcam.canvas);
-        labelContainer = document.getElementById("label-container");
-        for (let i = 0; i < maxPredictions; i++) {
-            labelContainer.appendChild(document.createElement("div"));
-        }
-    } catch (e) {
-        console.error(e);
-        loadingMsg.textContent = "모델을 불러오는데 실패했습니다. 주소를 확인해주세요.";
-    }
-}
-
-async function loopAnimalTest() {
-    webcam.update(); 
-    await predictAnimalTest();
-    window.requestAnimationFrame(loopAnimalTest);
-}
-
-async function predictAnimalTest() {
-    const prediction = await model.predict(webcam.canvas);
     for (let i = 0; i < maxPredictions; i++) {
         const className = prediction[i].className;
         const probability = (prediction[i].probability * 100).toFixed(0);
         
-        // 결과 표시 (이름: 퍼센트)
-        labelContainer.childNodes[i].innerHTML = `
-            <span>${className}</span>
-            <span>${probability}%</span>
+        // 결과 바 HTML 생성
+        const resultItem = document.createElement('div');
+        resultItem.className = 'result-bar-wrapper';
+        resultItem.innerHTML = `
+            <div class="label-text">
+                <span>${className}</span>
+                <span>${probability}%</span>
+            </div>
+            <div class="bar-bg">
+                <div class="bar-fill" style="width: ${probability}%"></div>
+            </div>
         `;
+        labelContainer.appendChild(resultItem);
     }
 }
