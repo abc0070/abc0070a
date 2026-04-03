@@ -37,7 +37,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-primary);
     transition: background-color var(--transition-speed), color var(--transition-speed);
-    padding: 40px 0;
+    padding: 40px 0 80px 0; /* 하단 여백 추가 */
 }
 
 .main-wrapper {
@@ -68,7 +68,7 @@ body {
     z-index: 1000;
 }
 
-.container, .contact-container {
+.container, .contact-container, .disqus-container {
     background-color: var(--container-bg);
     padding: 50px 40px;
     border-radius: 30px;
@@ -141,6 +141,15 @@ h1, h2 {
     transform: translateY(-2px);
 }
 
+/* Disqus 스타일 */
+.disqus-container {
+    text-align: left;
+}
+
+.disqus-container h2 {
+    text-align: center;
+}
+
 /* 로또 번호 디자인 유지 */
 .numbers-container {
     display: flex;
@@ -183,5 +192,5 @@ h1, h2 {
 }
 
 @media (max-width: 480px) {
-    .container, .contact-container { padding: 30px 20px; }
+    .container, .contact-container, .disqus-container { padding: 30px 20px; }
 }
