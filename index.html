@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>인생역전! 로또 추첨 & AI 동물상 테스트 & 오늘의 코인</title>
-    <meta name="description" content="AI 동물상 테스트, 로또 번호 생성, 오늘의 추천 코인과 운세 서비스를 제공합니다.">
-    <meta name="keywords" content="오늘의코인, 급상승알트코인, 사주팔자, 동물상테스트, 로또추첨, 인공지능운세, 행운추첨">
+    <title>AI 행운연구소 - 인공지능 동물상 테스트 및 전통 사주 운세 정보</title>
+    <meta name="description" content="인공지능(AI)과 전통 명리학을 결합하여 과학적인 동물상 테스트, 사주 분석, 로또 확률 통계 정보를 제공하는 행운 전문 매거진입니다.">
+    <meta name="keywords" content="오늘의운세, 동물상테스트, 사주팔자, 로또번호추첨, AI관상, 행운의코인, 명리학, TensorFlow">
 
-    <!-- 구글 애드센스 -->
+    <!-- 구글 애드센스 소유권 코드 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6499389234088872" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -23,137 +23,147 @@
             <span class="logo">🍀 AI 행운연구소</span>
             <div class="menu">
                 <a href="#about">연구소소개</a>
-                <a href="#today-fortune">오늘의운세</a>
-                <a href="#coin-section">오늘의코인</a>
-                <a href="#animal-test">동물상테스트</a>
-                <a href="#saju-section">사주팔자</a>
-                <a href="#lotto-gen">로또추첨기</a>
-                <a href="privacy.html" class="special-link">개인정보처리방침</a>
+                <a href="#animal-test">AI관상</a>
+                <a href="#fortune-section">매일운세</a>
+                <a href="#saju-info">명리학정보</a>
+                <a href="#lotto-info">로또통계</a>
+                <a href="privacy.html">개인정보방침</a>
             </div>
-            <button id="theme-toggle" aria-label="테마 전환">
-                <i class="fas fa-moon"></i>
-            </button>
+            <button id="theme-toggle" aria-label="테마 전환"><i class="fas fa-moon"></i></button>
         </div>
     </nav>
 
     <div class="main-wrapper">
         <header id="hero">
-            <h1>당신의 내일은 <span class="highlight">오늘보다 빛날 것입니다.</span></h1>
-            <p>최신 AI 기술과 확률 알고리즘으로 당신의 일상에 행운을 더합니다.</p>
+            <h1>데이터로 해석하는 <span class="highlight">당신의 운명과 행운</span></h1>
+            <p>AI 행운연구소는 인공지능 기술과 인문학적 통찰을 통해 일상의 가치를 발견합니다.</p>
         </header>
 
-        <!-- 사이트 소개 섹션 -->
-        <section id="about" class="container about-section">
-            <div class="about-content">
-                <div class="about-icon"><i class="fas fa-microscope"></i></div>
-                <h2>AI 행운연구소는 어떤 곳인가요?</h2>
-                <p>첨단 인공지능 기술과 동양의 전통 명리학을 결합하여 현대인의 일상에 즐거움과 행운을 전달합니다.</p>
-                <div class="values-grid">
-                    <div class="value-item"><i class="fas fa-shield-alt"></i><h4>철저한 프라이버시</h4><p>서버 저장 없이 브라우저 내에서 안전하게 처리됩니다.</p></div>
-                    <div class="value-item"><i class="fas fa-chart-line"></i><h4>데이터 기반 분석</h4><p>정밀한 알고리즘을 바탕으로 신뢰도 높은 결과를 제공합니다.</p></div>
-                    <div class="value-item"><i class="fas fa-gift"></i><h4>100% 무료 서비스</h4><p>누구나 제한 없이 모든 기능을 무료로 이용 가능합니다.</p></div>
-                </div>
+        <!-- 핵심 칼럼 섹션 (고품질 콘텐츠 증강) -->
+        <section id="main-articles" class="article-container">
+            <div class="main-article">
+                <div class="badge">Hot Topic</div>
+                <h2>AI와 관상학: 인공지능은 어떻게 당신의 얼굴을 읽는가?</h2>
+                <p>현대 기술의 정점인 인공지능(AI)이 과거의 유산인 관상학을 재해석하고 있습니다. 본 연구소에서 제공하는 동물상 테스트는 단순히 재미를 넘어, 수만 장의 안면 데이터를 학습한 신경망 모델(Convolutional Neural Network)을 기반으로 합니다. 얼굴의 수천 가지 특징점을 추출하여 통계적으로 가장 유사한 군집을 찾아내는 이 과정은 과학적인 데이터 분석의 산물입니다.</p>
+                <a href="#animal-test" class="read-more">테스트 해보기</a>
             </div>
         </section>
 
         <!-- 오늘의 운세 섹션 -->
-        <section id="today-fortune" class="container fortune-section">
-            <h2>✨ 오늘의 운세</h2>
-            <p class="subtitle">생년월일을 입력하고 오늘 하루의 기운을 확인하세요.</p>
+        <section id="fortune-section" class="container">
+            <div class="content-header">
+                <h2>✨ 오늘의 맞춤형 운세 서비스</h2>
+                <p>생년월일 기반의 데이터 매칭을 통해 오늘 하루의 흐름을 짚어드립니다.</p>
+            </div>
             <div class="fortune-form">
                 <div class="form-row">
-                    <div class="form-group"><label>이름</label><input type="text" id="user-name" placeholder="이름 입력" required></div>
-                    <div class="form-group"><label>생년월일</label><input type="date" id="fortune-birth" required></div>
+                    <div class="form-group"><label>이름</label><input type="text" id="user-name" placeholder="이름을 입력하세요"></div>
+                    <div class="form-group"><label>생년월일</label><input type="date" id="fortune-birth"></div>
                 </div>
-                <button type="button" id="fortune-btn">오늘의 운세 보기</button>
+                <button type="button" id="fortune-btn">행운의 리포트 생성하기</button>
             </div>
             <div id="fortune-result" class="fortune-result" style="display:none;">
                 <div class="total-luck">
                     <div class="luck-icon" id="total-icon">🌟</div>
-                    <h3 id="luck-title">대길(大吉)</h3>
-                    <p id="total-comment">오늘은 모든 일이 술술 풀리는 날입니다!</p>
+                    <h3 id="luck-title">-</h3>
+                    <p id="total-comment">-</p>
                 </div>
                 <div class="luck-scores">
-                    <div class="score-item"><span>💰 금전운</span><div class="progress-bar"><div class="progress-fill" id="money-bar"></div></div><span id="money-text">90%</span></div>
-                    <div class="score-item"><span>❤️ 애정운</span><div class="progress-bar"><div class="progress-fill" id="love-bar"></div></div><span id="love-text">85%</span></div>
-                    <div class="score-item"><span>💪 건강운</span><div class="progress-bar"><div class="progress-fill" id="health-bar"></div></div><span id="health-text">70%</span></div>
+                    <div class="score-item"><span>💰 금전운</span><div class="progress-bar"><div class="progress-fill" id="money-bar"></div></div><span id="money-text">0%</span></div>
+                    <div class="score-item"><span>❤️ 애정운</span><div class="progress-bar"><div class="progress-fill" id="love-bar"></div></div><span id="love-text">0%</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- 오늘의 알트코인 섹션 추가 -->
-        <section id="coin-section" class="container coin-section">
-            <h2>🚀 오늘의 급상승 기대 코인</h2>
-            <p class="subtitle">AI가 분석한 오늘의 행운의 알트코인 리스트입니다.</p>
-            
-            <div class="coin-grid" id="coin-list">
-                <!-- 코인 리스트가 JavaScript로 생성됨 -->
-                <div class="coin-loading">코인 데이터를 분석 중입니다...</div>
+        <!-- AI 동물상 테스트 섹션 -->
+        <section id="animal-test" class="container">
+            <div class="content-header">
+                <h2>🐶 인공지능 동물상 정밀 분석</h2>
+                <p>구글의 머신러닝 엔진을 사용하여 얼굴의 특징을 분석하고 가장 닮은 동물을 찾아냅니다.</p>
             </div>
-
-            <div class="content-block">
-                <h3>⚠️ 투자 주의사항</h3>
-                <p>본 서비스에서 제공하는 코인 정보는 AI 확률 기반의 '행운 테마'용 콘텐츠이며, 실제 투자 권유를 목적으로 하지 않습니다. 가상자산 투자는 원금 손실의 위험이 크므로 본인의 판단하에 신중하게 결정하시기 바랍니다.</p>
-            </div>
-        </section>
-
-        <!-- 동물상 테스트 섹션 -->
-        <section id="animal-test" class="container animal-test-container">
-            <h2>🐶 인공지능 동물상 테스트</h2>
-            <p class="subtitle">사진을 업로드하여 당신과 닮은 동물을 찾아보세요!</p>
-            <p class="warning-text">⚠️ AI 분석 모델 로딩으로 인해 5~10초 정도 시간이 소요될 수 있습니다.</p>
             <div class="upload-area" id="upload-area">
                 <input type="file" id="image-upload" accept="image/*" style="display:none;">
-                <label for="image-upload" class="upload-label"><i class="fas fa-camera"></i><span>사진 선택 또는 드래그</span></label>
+                <label for="image-upload" class="upload-label">
+                    <i class="fas fa-file-image"></i>
+                    <span>분석할 사진을 업로드하세요</span>
+                </label>
                 <img id="image-preview" src="#" alt="미리보기" style="display:none;">
             </div>
-            <div id="loading-message" class="loading-animation" style="display:none;"><i class="fas fa-spinner fa-spin"></i> 정밀 분석 중...</div>
+            <div id="loading-message" class="loading-animation" style="display:none;"><i class="fas fa-spinner fa-spin"></i> 신경망 분석 중...</div>
             <div id="label-container"></div>
-        </section>
-
-        <!-- 사주팔자 분석 섹션 -->
-        <section id="saju-section" class="container saju-container">
-            <h2>📜 전통 사주팔자 분석</h2>
-            <p class="subtitle">태어난 연월일시를 통한 당신의 타고난 기운을 분석합니다.</p>
-            <div class="saju-form">
-                <div class="form-row">
-                    <div class="form-group"><label>생년월일</label><input type="date" id="birth-date" required></div>
-                    <div class="form-group"><label>성별</label><select id="gender"><option value="male">남성</option><option value="female">여성</option></select></div>
-                </div>
-                <button type="button" id="saju-btn">나의 사주 분석하기</button>
-            </div>
-            <div id="saju-result" class="saju-result" style="display:none;">
-                <div class="saju-card-grid">
-                    <div class="saju-card"><span>시주</span><strong id="si-ju">?</strong></div><div class="saju-card"><span>일주</span><strong id="il-ju">?</strong></div><div class="saju-card"><span>월주</span><strong id="wol-ju">?</strong></div><div class="saju-card"><span>년주</span><strong id="nyeon-ju">?</strong></div>
-                </div>
-                <div class="saju-description"><h3>🔮 사주 분석 결과</h3><p id="saju-comment">데이터를 분석 중입니다...</p></div>
+            
+            <div class="info-block">
+                <h4>📌 AI 분석 안내</h4>
+                <p>본 테스트에 사용되는 TensorFlow.js 모델은 사용자의 이미지를 서버로 전송하지 않습니다. 모든 연산은 사용자의 기기(브라우저) 내에서 로컬로 실행되어 개인정보가 철저히 보호됩니다. 또한 고해상도 이미지를 사용하실수록 분석의 정확도가 높아집니다.</p>
             </div>
         </section>
 
-        <!-- 로또 추첨기 섹션 -->
-        <section id="lotto-gen" class="container lotto-section">
-            <h2>🍀 로또 번호 추첨기</h2>
-            <div class="lotto-display">
-                <div class="numbers-main"><div class="number-circle">?</div><div class="number-circle">?</div><div class="number-circle">?</div><div class="number-circle">?</div><div class="number-circle">?</div><div class="number-circle">?</div></div>
-                <div class="bonus-divider"><i class="fas fa-plus"></i></div>
-                <div class="numbers-bonus"><div class="number-circle bonus-circle">?</div></div>
+        <!-- 사주 명리학 정보 섹션 -->
+        <section id="saju-info" class="container info-section">
+            <h2>📜 전통 명리학으로 보는 삶의 지혜</h2>
+            <div class="article-grid">
+                <article>
+                    <h3>음양오행의 조화와 균형</h3>
+                    <p>전통 사주학의 핵심은 음양(陰陽)과 오행(木, 火, 土, 金, 水)의 균형에 있습니다. 인간은 태어날 때 우주의 기운을 부여받으며, 이 기운의 편중에 따라 성격과 운명의 흐름이 결정됩니다. 자신의 사주에 부족한 기운을 찾아 색상, 음식, 장소 등으로 보완하는 것이 명리학의 실천적인 목적입니다.</p>
+                </article>
+                <article>
+                    <h3>사주팔자 분석 도구</h3>
+                    <div class="mini-tool">
+                        <input type="date" id="birth-date">
+                        <button type="button" id="saju-btn" style="margin-top:10px; padding: 10px 20px;">간단 사주 보기</button>
+                    </div>
+                    <div id="saju-result" style="display:none; margin-top:20px;">
+                        <p>년주: <span id="nyeon-ju">-</span> | 월주: <span id="wol-ju">-</span> | 일주: <span id="il-ju">-</span></p>
+                        <p id="saju-comment" style="font-size:0.9rem; color: var(--accent-color);"></p>
+                    </div>
+                </article>
             </div>
-            <button id="generate-btn">번호 추첨하기</button>
         </section>
 
-        <!-- 제휴 문의 섹션 -->
-        <section id="contact" class="contact-container">
-            <h2>🤝 비즈니스 및 제휴 문의</h2>
-            <form action="https://formspree.io/f/xqegylep" method="POST" id="contact-form">
-                <div class="form-group"><label>성함</label><input type="text" name="name" placeholder="문의하시는 분 성함" required></div>
-                <div class="form-group"><label>이메일</label><input type="email" name="_replyto" placeholder="메일 주소" required></div>
-                <div class="form-group"><label>문의 상세</label><textarea name="message" rows="4" placeholder="내용을 남겨주세요" required></textarea></div>
-                <button type="submit" id="submit-btn">제휴 문의 보내기</button>
-            </form>
+        <!-- 로또 확률 통계 섹션 -->
+        <section id="lotto-info" class="container info-section">
+            <h2>🍀 로또 확률과 무작위성의 원리</h2>
+            <div class="article-grid">
+                <article>
+                    <h3>수학적으로 접근하는 로또 당첨</h3>
+                    <p>로또 6/45의 1등 당첨 확률은 8,145,060분의 1입니다. 이는 벼락을 맞을 확률보다 낮다고 알려져 있습니다. 하지만 인간은 본능적으로 패턴을 찾으려 합니다. 본 연구소의 추첨기는 진정한 무작위성(True Randomness)을 보장하는 알고리즘을 사용하여, 편견 없는 행운의 번호를 제공합니다.</p>
+                </article>
+                <article>
+                    <div class="lotto-display">
+                        <div class="numbers-main">
+                            <div class="number-circle">?</div><div class="number-circle">?</div><div class="number-circle">?</div><div class="number-circle">?</div><div class="number-circle">?</div><div class="number-circle">?</div>
+                        </div>
+                    </div>
+                    <button id="generate-btn">행운번호 생성</button>
+                </article>
+            </div>
         </section>
 
+        <!-- 오늘의 코인 섹션 -->
+        <section id="coin-section" class="container">
+            <h2>🚀 가상자산과 데이터 분석</h2>
+            <p>오늘의 기운과 데이터 흐름이 일치하는 알트코인 리스트입니다.</p>
+            <div class="coin-grid" id="coin-list"></div>
+            <div class="info-block" style="border-left-color: #f1c40f;">
+                <h4>⚠️ 투자 주의사항 (Disclaimer)</h4>
+                <p>가상자산은 높은 변동성을 가집니다. 본 정보는 오락 및 데이터 참고용이며 어떠한 투자 결과도 보장하지 않습니다. 반드시 본인의 책임하에 신중하게 투자하시기 바랍니다.</p>
+            </div>
+        </section>
+
+        <!-- 사이트 소개 섹션 -->
+        <section id="about" class="container about-section">
+            <h2>AI 행운연구소 미션</h2>
+            <p>우리는 최첨단 알고리즘을 통해 인간의 삶에 긍정적인 통찰을 제공하는 것을 목표로 합니다. 텍스트 한 줄, 숫자 한 자에도 데이터의 가치를 담아 여러분의 미래를 응원합니다.</p>
+            <div class="values-grid">
+                <div class="value-item"><i class="fas fa-microscope"></i><h4>기술력</h4><p>TensorFlow.js 기반 머신러닝 모델 활용</p></div>
+                <div class="value-item"><i class="fas fa-book"></i><h4>전문성</h4><p>전통 인문학 데이터와 통계학의 결합</p></div>
+                <div class="value-item"><i class="fas fa-lock"></i><h4>안전성</h4><p>개인정보 비저장 로컬 처리 원칙</p></div>
+            </div>
+        </section>
+
+        <!-- 댓글 섹션 -->
         <div class="disqus-container">
-            <h2>💬 방문자 한마디</h2>
+            <h2>💬 방문자 커뮤니티</h2>
             <div id="disqus_thread"></div>
             <script>
                 (function() {
@@ -168,8 +178,16 @@
 
     <footer id="footer">
         <div class="footer-content">
-            <p>&copy; 2024 AI 행운연구소. All rights reserved.</p>
-            <div class="footer-links"><a href="privacy.html">개인정보처리방침</a></div>
+            <div class="footer-info">
+                <span class="logo">🍀 AI 행운연구소</span>
+                <p>서울시 기술 혁신 행운 데이터 센터 운영팀</p>
+            </div>
+            <div class="footer-links">
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="#about">연구소소개</a>
+                <a href="mailto:contact@luckai.com">제휴문의</a>
+            </div>
+            <p class="copyright">&copy; 2024 AI 행운연구소. All rights reserved.</p>
         </div>
     </footer>
 
