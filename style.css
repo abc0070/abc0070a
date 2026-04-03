@@ -1,9 +1,11 @@
-/* 기본 라이트 모드 변수 */
+/* 라이트/다크 모드 변수 확장 */
 :root {
     --bg-color: #f0f2f5;
     --container-bg: #ffffff;
     --text-primary: #2c3e50;
-    --text-secondary: #333333;
+    --text-secondary: #666666;
+    --input-bg: #f9f9f9;
+    --input-border: #dddddd;
     --shadow: rgba(0, 0, 0, 0.1);
     --btn-bg: #3498db;
     --btn-hover: #2980b9;
@@ -11,12 +13,13 @@
     --transition-speed: 0.3s;
 }
 
-/* 다크 모드 변수 - html[data-theme='dark'] 에 적용 */
 html[data-theme="dark"] {
     --bg-color: #1a1a1a;
     --container-bg: #2d2d2d;
     --text-primary: #ffffff;
-    --text-secondary: #ecf0f1;
+    --text-secondary: #aaaaaa;
+    --input-bg: #3d3d3d;
+    --input-border: #444444;
     --shadow: rgba(0, 0, 0, 0.5);
     --btn-bg: #2ecc71;
     --btn-hover: #27ae60;
@@ -33,11 +36,16 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     transition: background-color var(--transition-speed), color var(--transition-speed);
+    padding: 40px 0;
+}
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
 }
 
 #theme-toggle {
@@ -60,11 +68,7 @@ body {
     z-index: 1000;
 }
 
-#theme-toggle:hover {
-    transform: scale(1.1);
-}
-
-.container {
+.container, .contact-container {
     background-color: var(--container-bg);
     padding: 50px 40px;
     border-radius: 30px;
@@ -75,66 +79,109 @@ body {
     transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-h1 {
+h1, h2 {
     font-size: 2rem;
-    margin-bottom: 40px;
-    color: var(--text-primary);
+    margin-bottom: 20px;
 }
 
+.contact-container p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+/* 폼 디자인 */
+#contact-form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--btn-bg);
+}
+
+#submit-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background-color: var(--btn-bg);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#submit-btn:hover {
+    background-color: var(--btn-hover);
+    transform: translateY(-2px);
+}
+
+/* 로또 번호 디자인 유지 */
 .numbers-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 .number-circle {
-    width: 65px;
-    height: 65px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #fff;
     background-color: var(--circle-default);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.ball-1 { background-color: #fbc400; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-.ball-11 { background-color: #69c8f2; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-.ball-21 { background-color: #ff7272; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-.ball-31 { background-color: #aaa; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-.ball-41 { background-color: #b0d840; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+.ball-1 { background-color: #fbc400; }
+.ball-11 { background-color: #69c8f2; }
+.ball-21 { background-color: #ff7272; }
+.ball-31 { background-color: #aaa; }
+.ball-41 { background-color: #b0d840; }
 
 #generate-btn {
     padding: 18px 45px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
     background-color: var(--btn-bg);
     color: white;
     border: none;
     border-radius: 50px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-}
-
-#generate-btn:hover {
-    background-color: var(--btn-hover);
-    transform: translateY(-3px);
+    transition: all 0.3s;
 }
 
 @media (max-width: 480px) {
-    .number-circle {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-    }
-    .container {
-        padding: 40px 20px;
-    }
+    .container, .contact-container { padding: 30px 20px; }
 }
