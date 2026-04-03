@@ -37,7 +37,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-primary);
     transition: background-color var(--transition-speed), color var(--transition-speed);
-    padding: 40px 0 80px 0; /* 하단 여백 추가 */
+    padding: 40px 0 80px 0;
 }
 
 .main-wrapper {
@@ -79,98 +79,86 @@ body {
     transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-h1, h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
 }
 
-.contact-container p {
+.subtitle {
+    font-size: 1rem;
     color: var(--text-secondary);
     margin-bottom: 30px;
-    font-size: 0.95rem;
 }
 
-/* 폼 디자인 */
-#contact-form {
-    text-align: left;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 700;
-    font-size: 0.9rem;
-}
-
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border-radius: 10px;
-    border: 1px solid var(--input-border);
-    background-color: var(--input-bg);
-    color: var(--text-primary);
-    font-family: inherit;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-.form-group input:focus, .form-group textarea:focus {
-    outline: none;
-    border-color: var(--btn-bg);
-}
-
-#submit-btn {
-    width: 100%;
-    padding: 15px;
+/* 동물상 테스트 디자인 */
+#start-btn {
+    padding: 15px 30px;
     font-size: 1.1rem;
     font-weight: 700;
     background-color: var(--btn-bg);
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    margin-bottom: 20px;
+    transition: all 0.2s;
 }
 
-#submit-btn:hover {
-    background-color: var(--btn-hover);
+#start-btn:hover {
     transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--shadow);
 }
 
-/* Disqus 스타일 */
-.disqus-container {
+#webcam-container {
+    margin: 20px auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    background-color: #000;
+}
+
+#webcam-container canvas {
+    border-radius: 20px;
+}
+
+#label-container {
+    margin-top: 20px;
     text-align: left;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.disqus-container h2 {
-    text-align: center;
+#label-container div {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 폼 디자인 및 기타 요소 */
+.contact-container p { color: var(--text-secondary); margin-bottom: 30px; }
+#contact-form { text-align: left; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.9rem; }
+.form-group input, .form-group textarea {
+    width: 100%; padding: 12px 15px; border-radius: 10px; border: 1px solid var(--input-border);
+    background-color: var(--input-bg); color: var(--text-primary); font-family: inherit;
+}
+
+#submit-btn {
+    width: 100%; padding: 15px; font-size: 1.1rem; font-weight: 700;
+    background-color: var(--btn-bg); color: white; border: none; border-radius: 10px; cursor: pointer;
 }
 
 /* 로또 번호 디자인 유지 */
-.numbers-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 40px;
-}
-
+.numbers-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
 .number-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #fff;
-    background-color: var(--circle-default);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    font-size: 1.4rem; font-weight: 700; color: #fff; background-color: var(--circle-default);
 }
 
 .ball-1 { background-color: #fbc400; }
@@ -180,15 +168,8 @@ h1, h2 {
 .ball-41 { background-color: #b0d840; }
 
 #generate-btn {
-    padding: 18px 45px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    background-color: var(--btn-bg);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    transition: all 0.3s;
+    padding: 18px 45px; font-size: 1.1rem; font-weight: 700; cursor: pointer;
+    background-color: var(--btn-bg); color: white; border: none; border-radius: 50px;
 }
 
 @media (max-width: 480px) {
