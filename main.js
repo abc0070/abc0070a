@@ -1,22 +1,45 @@
 const generateBtn = document.getElementById('generate-btn');
 const numberCircles = document.querySelectorAll('.number-circle');
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
 
+// 테마 초기 설정 (localStorage 확인)
+const savedTheme = localStorage.getItem('theme') || 'light';
+body.setAttribute('data-theme', savedTheme);
+updateThemeIcon(savedTheme);
+
+// 테마 토글 이벤트
+themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+});
+
+function updateThemeIcon(theme) {
+    const icon = themeToggle.querySelector('i');
+    if (theme === 'dark') {
+        icon.className = 'fas fa-sun';
+    } else {
+        icon.className = 'fas fa-moon';
+    }
+}
+
+// 로또 번호 추첨 로직
 generateBtn.addEventListener('click', () => {
-    // 버튼 비활성화 (애니메이션 도중 클릭 방지)
     generateBtn.disabled = true;
     generateBtn.textContent = '추첨 중...';
 
-    // 기존 번호 초기화 및 애니메이션 준비
     numberCircles.forEach(circle => {
         circle.style.transform = 'scale(0) rotate(-180deg)';
         circle.style.opacity = '0';
-        // 기존 클래스 제거 (ball-* 클래스들)
         circle.className = 'number-circle';
     });
 
     const lottoNumbers = generateLottoNumbers();
 
-    // 약간의 지연 후 숫자 표시 시작
     setTimeout(() => {
         displayNumbers(lottoNumbers);
     }, 300);
@@ -37,22 +60,19 @@ function displayNumbers(numbers) {
             const circle = numberCircles[index];
             circle.textContent = number;
             
-            // 번호 대역별 클래스 추가
             const colorClass = getBallColorClass(number);
             circle.classList.add(colorClass);
 
-            // 애니메이션 실행
             circle.style.transform = 'scale(1) rotate(0deg)';
             circle.style.opacity = '1';
 
-            // 마지막 번호까지 표시되면 버튼 다시 활성화
             if (index === numbers.length - 1) {
                 setTimeout(() => {
                     generateBtn.disabled = false;
                     generateBtn.textContent = '번호 다시 추첨하기';
                 }, 500);
             }
-        }, index * 250); // 0.25초 간격으로 하나씩 등장
+        }, index * 250);
     });
 }
 
