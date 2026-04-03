@@ -91,61 +91,91 @@ body {
     box-shadow: var(--shadow);
 }
 
-/* About Section */
-.about-section {
-    text-align: center;
+/* Saju Section */
+.saju-form {
+    max-width: 500px;
+    margin: 0 auto 40px;
+    text-align: left;
 }
 
-.about-icon {
-    font-size: 3rem;
-    color: var(--accent-color);
+.form-row {
+    display: flex;
+    gap: 20px;
     margin-bottom: 20px;
 }
 
-.about-section h2 { margin-bottom: 20px; }
-.about-section p { max-width: 800px; margin: 0 auto 40px; color: var(--text-secondary); }
+.form-row .form-group { flex: 1; }
 
-.values-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+.saju-result {
     margin-top: 40px;
+    padding-top: 40px;
+    border-top: 2px dashed var(--bg-color);
+    animation: fadeIn 0.8s ease-out;
 }
 
-.value-item {
-    padding: 30px;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.saju-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.saju-card {
+    background: var(--bg-color);
+    padding: 20px 10px;
+    border-radius: 15px;
+    border: 2px solid var(--accent-color);
+}
+
+.saju-card span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.saju-card strong {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.saju-description {
     background-color: var(--bg-color);
+    padding: 30px;
     border-radius: 20px;
-    transition: transform 0.3s;
+    text-align: left;
 }
 
+.saju-description h3 { margin-bottom: 15px; color: var(--accent-color); }
+
+/* About Section */
+.about-section { text-align: center; }
+.about-icon { font-size: 3rem; color: var(--accent-color); margin-bottom: 20px; }
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+.value-item { padding: 30px; background-color: var(--bg-color); border-radius: 20px; transition: 0.3s; }
 .value-item:hover { transform: translateY(-10px); }
 .value-item i { font-size: 2rem; color: var(--accent-color); margin-bottom: 15px; }
-.value-item h4 { margin-bottom: 10px; font-size: 1.1rem; }
-.value-item p { font-size: 0.9rem; margin-bottom: 0; }
 
 /* Content Blocks */
 .content-block {
-    margin-top: 40px;
-    padding: 30px;
-    background-color: var(--bg-color);
-    border-radius: 16px;
-    text-align: left;
-    border-left: 5px solid var(--accent-color);
+    margin-top: 40px; padding: 30px; background-color: var(--bg-color); border-radius: 16px;
+    text-align: left; border-left: 5px solid var(--accent-color);
 }
-
-.content-block h3 { margin-bottom: 10px; color: var(--accent-color); }
 
 /* Articles */
 .article-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 article { text-align: left; padding: 25px; background-color: var(--bg-color); border-radius: 20px; }
-article h3 { margin-bottom: 10px; color: var(--accent-color); }
 
 /* Lotto & AI Styles */
 .numbers-container { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; }
 .number-circle {
     width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
-    font-weight: 700; color: white; background-color: #ddd; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-size: 1.3rem;
+    font-weight: 700; color: white; background-color: #ddd; font-size: 1.3rem;
 }
 
 .ball-1 { background-color: #fbc400; }
@@ -154,7 +184,7 @@ article h3 { margin-bottom: 10px; color: var(--accent-color); }
 .ball-31 { background-color: #aaa; }
 .ball-41 { background-color: #b0d840; }
 
-#generate-btn, #start-btn, #submit-btn {
+#generate-btn, #start-btn, #submit-btn, #saju-btn {
     display: block; margin: 0 auto; padding: 18px 45px; background-color: var(--accent-color);
     color: white; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; transition: 0.2s;
 }
@@ -164,16 +194,14 @@ article h3 { margin-bottom: 10px; color: var(--accent-color); }
 /* Form Styles */
 .form-group { margin-bottom: 20px; text-align: left; }
 .form-group label { display: block; margin-bottom: 8px; font-weight: 700; }
-input, textarea { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background-color: var(--input-bg); color: var(--text-primary); font-family: inherit; }
+input, textarea, select { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background-color: var(--input-bg); color: var(--text-primary); font-family: inherit; }
 
 /* Footer */
 #footer { background-color: var(--container-bg); padding: 60px 20px; margin-top: 80px; text-align: center; }
-.footer-links { margin-top: 20px; }
 .footer-links a { margin: 0 15px; color: var(--text-secondary); text-decoration: none; }
 
 @media (max-width: 768px) {
-    .values-grid, .article-grid { grid-template-columns: 1fr; }
+    .values-grid, .article-grid, .saju-card-grid { grid-template-columns: 1fr; }
     #hero h1 { font-size: 2rem; }
-    .nav-content { padding: 10px; }
-    .menu { display: none; } /* 모바일에서는 메뉴 숨김 (간결함 유지) */
+    .menu { display: none; }
 }
