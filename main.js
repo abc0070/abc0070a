@@ -26,6 +26,67 @@ function updateThemeIcon(theme) {
     }
 }
 
+// --- 동물상 테스트 (사진 업로드 방식) ---
+const MODEL_URL = "https://teachablemachine.withgoogle.com/models/Hscx2n06o/";
+let model, labelContainer, maxPredictions;
+
+async function loadModel() {
+    const modelURL = MODEL_URL + "model.json";
+    const metadataURL = MODEL_URL + "metadata.json";
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
+    console.log("AI Model Loaded");
+}
+loadModel();
+
+const imageUpload = document.getElementById('image-upload');
+const imagePreview = document.getElementById('image-preview');
+const uploadLabel = document.querySelector('.upload-label');
+const loadingMsg = document.getElementById('loading-message');
+labelContainer = document.getElementById('label-container');
+
+if (imageUpload) {
+    imageUpload.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            imagePreview.src = event.target.result;
+            imagePreview.style.display = 'block';
+            uploadLabel.style.display = 'none';
+            
+            imagePreview.onload = async () => {
+                loadingMsg.style.display = 'block';
+                labelContainer.innerHTML = '';
+                if (!model) await loadModel();
+                await predict(imagePreview);
+                loadingMsg.style.display = 'none';
+            };
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+async function predict(imgElement) {
+    const prediction = await model.predict(imgElement);
+    prediction.sort((a, b) => b.probability - a.probability);
+
+    labelContainer.innerHTML = '';
+    for (let i = 0; i < maxPredictions; i++) {
+        const className = prediction[i].className;
+        const probability = (prediction[i].probability * 100).toFixed(0);
+        
+        const resultItem = document.createElement('div');
+        resultItem.className = 'result-bar-wrapper';
+        resultItem.innerHTML = `
+            <div class="label-text"><span>${className}</span><span>${probability}%</span></div>
+            <div class="bar-bg"><div class="bar-fill" style="width: ${probability}%"></div></div>
+        `;
+        labelContainer.appendChild(resultItem);
+    }
+}
+
 // --- 사주팔자 분석 로직 ---
 const sajuBtn = document.getElementById('saju-btn');
 const sajuResult = document.getElementById('saju-result');
@@ -33,19 +94,13 @@ const sajuResult = document.getElementById('saju-result');
 if (sajuBtn) {
     sajuBtn.addEventListener('click', () => {
         const birthDate = document.getElementById('birth-date').value;
-        if (!birthDate) {
-            alert('생년월일을 선택해주세요!');
-            return;
-        }
-
+        if (!birthDate) { alert('생년월일을 선택해주세요!'); return; }
         sajuBtn.textContent = '운명 분석 중...';
         sajuBtn.disabled = true;
 
         setTimeout(() => {
             const date = new Date(birthDate);
             const year = date.getFullYear();
-            
-            // 간단한 천간 지지 계산 (예시 로직)
             const tianGan = ["경", "신", "임", "계", "갑", "을", "병", "정", "무", "기"];
             const diZhi = ["신", "유", "술", "해", "자", "축", "인", "묘", "진", "사", "오", "미"];
             
@@ -67,12 +122,9 @@ if (sajuBtn) {
                 "포용력 있고 듬직한 대지의 기운입니다. 꾸준한 노력이 결실을 맺어 중년 이후 큰 복이 들어오는 사주입니다."
             ];
             document.getElementById('saju-comment').textContent = comments[year % comments.length];
-
             sajuResult.style.display = 'block';
             sajuBtn.textContent = '나의 사주 다시 분석하기';
             sajuBtn.disabled = false;
-            
-            window.scrollTo({ top: sajuResult.offsetTop - 100, behavior: 'smooth' });
         }, 1500);
     });
 }
@@ -90,88 +142,23 @@ if (generateBtn) {
             circle.style.opacity = '0';
             circle.className = 'number-circle';
         });
-        const lottoNumbers = generateLottoNumbers();
-        setTimeout(() => displayNumbers(lottoNumbers), 300);
+        const lottoNumbers = Array.from({length: 45}, (_, i) => i + 1).sort(() => Math.random() - 0.5).slice(0, 6).sort((a,b) => a-b);
+        setTimeout(() => {
+            numbersContainer(lottoNumbers);
+            generateBtn.disabled = false;
+            generateBtn.textContent = '번호 다시 추첨하기';
+        }, 300);
     });
 }
 
-function generateLottoNumbers() {
-    const numbers = new Set();
-    while (numbers.size < 6) {
-        const randomNumber = Math.floor(Math.random() * 45) + 1;
-        numbers.add(randomNumber);
-    }
-    return Array.from(numbers).sort((a, b) => a - b);
-}
-
-function displayNumbers(numbers) {
+function numbersContainer(numbers) {
     numbers.forEach((number, index) => {
         setTimeout(() => {
             const circle = numberCircles[index];
             circle.textContent = number;
-            circle.classList.add(getBallColorClass(number));
+            circle.className = `number-circle ball-${Math.floor((number-1)/10)*10+1}`;
             circle.style.transform = 'scale(1) rotate(0deg)';
             circle.style.opacity = '1';
-            if (index === numbers.length - 1) {
-                setTimeout(() => {
-                    generateBtn.disabled = false;
-                    generateBtn.textContent = '번호 다시 추첨하기';
-                }, 500);
-            }
         }, index * 250);
     });
-}
-
-function getBallColorClass(number) {
-    if (number <= 10) return 'ball-1';
-    if (number <= 20) return 'ball-11';
-    if (number <= 30) return 'ball-21';
-    if (number <= 40) return 'ball-31';
-    return 'ball-41';
-}
-
-// --- 동물상 테스트 (Teachable Machine) ---
-const URL = "https://teachablemachine.withgoogle.com/models/Hscx2n06o/";
-let model, webcam, labelContainer, maxPredictions;
-
-async function init() {
-    const startBtn = document.getElementById("start-btn");
-    startBtn.style.display = "none";
-
-    const modelURL = URL + "model.json";
-    const metadataURL = URL + "metadata.json";
-    model = await tmImage.load(modelURL, metadataURL);
-    maxPredictions = model.getTotalClasses();
-
-    webcam = new tmImage.Webcam(200, 200, true);
-    await webcam.setup();
-    await webcam.play();
-    window.requestAnimationFrame(loop);
-
-    document.getElementById("webcam-container").appendChild(webcam.canvas);
-    labelContainer = document.getElementById("label-container");
-    labelContainer.innerHTML = '';
-    for (let i = 0; i < maxPredictions; i++) {
-        labelContainer.appendChild(document.createElement("div"));
-    }
-}
-
-async function loop() {
-    webcam.update();
-    await predict();
-    window.requestAnimationFrame(loop);
-}
-
-async function predict() {
-    const prediction = await model.predict(webcam.canvas);
-    for (let i = 0; i < maxPredictions; i++) {
-        const className = prediction[i].className;
-        const probability = (prediction[i].probability * 100).toFixed(0);
-        labelContainer.childNodes[i].innerHTML = `
-            <div class="result-bar-wrapper">
-                <div class="label-text"><span>${className}</span><span>${probability}%</span></div>
-                <div class="bar-bg"><div class="bar-fill" style="width: ${probability}%"></div></div>
-            </div>
-        `;
-    }
 }
